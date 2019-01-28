@@ -9,5 +9,10 @@
             "email": "wymakob@gmail.com"
         }
     ],
+    "autoload": {
+       "psr-4": {
+           "Vannyvann\\Formgroup\\": "src/"
+       }
+    },
     "minimum-stability": "dev"
 }
