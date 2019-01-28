@@ -7,16 +7,16 @@ return [
         'default' => [
             'components' => [
                 'Input' => [
-                    'view' => 'formgroup::groups.default.components.input',
+                    'view' => 'formgroup::default.input',
                     'casts' => ['name', 'value'],
                 ],
                 'Select' => [
-                    'view' => 'formgroup::groups.default.components.select',
+                    'view' => 'formgroup::default.select',
                     'casts' => ['name', 'options', 'value'],
                     'hidden' => ['value', 'placeholder', 'options']
                 ],
                 'Text' => [
-                    'view' => 'formgroup::groups.default.components.textarea',
+                    'view' => 'formgroup::default.textarea',
                     'casts' => ['name', 'value'],
                     'hidden' => ['value']
                 ]
