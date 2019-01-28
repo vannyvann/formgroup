@@ -1,0 +1,13 @@
+{
+    "name": "vannyvann/formgroup",
+    "require": {
+        "laravelcollective/html": "^5.7@dev"
+    },
+    "authors": [
+        {
+            "name": "Ivan Shumakov",
+            "email": "wymakob@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
