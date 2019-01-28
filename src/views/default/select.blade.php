@@ -1,6 +1,6 @@
 @if($params = new Vannyvann\Formgroup\FormgroupParams($params, $errors, $options, $config))
 
-    @component('formgroup::groups.default.template', compact('params'))
+    @component('formgroup::default.template', compact('params'))
         <select {!! $params->basicOptions(['class' => 'form-control']) !!}>
             @if($placeholder = $params->get('placeholder'))
                 <option>{{ $placeholder }}</option>
