@@ -17,6 +17,7 @@ class FormgroupParams
         $this->options = $options;
         $this->errors = $errors;
         $this->config = $config;
+        $this->classes = [];
 
         $this->replaceCasts();
         $this->replaceDefaults();
@@ -27,13 +28,18 @@ class FormgroupParams
 
     public function basicOptions($options = [])
     {
-        $params = array_merge($options, $this->params);
+        $this->classes[] = array_get($options, 'class');
+        $this->classes[] = array_get($this->get('class'), 'class');
+        $params = array_merge($this->params, $options);
+        $params['class'] = implode(' ',$this->classes);
+
         $params = $this->replaceHidden($params);
 
         $output = [];
         foreach($params as $key => $param){
             $output[] = $this->tagParam($key, $param);
         }
+
         return implode(' ', $output);
     }
 
@@ -68,7 +74,7 @@ class FormgroupParams
     {
         if($this->errors && $this->errors->has($this->get('name'))){
             $this->error = $this->errors->first($this->get('name'));
-            $this->params['class'] = $this->get('class') . ' ' . $this->config('error');
+            $this->classes[] = $this->config('error');
         }
     }
 
@@ -114,6 +120,10 @@ class FormgroupParams
 
     private function tagParam($key, $param)
     {
+        if($param === false){
+            return null;
+        }
+
         // if params set as [... 'param']
         if(is_integer($key)){
             return $param;

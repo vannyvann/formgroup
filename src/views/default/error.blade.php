@@ -1,5 +1,5 @@
 @if($params->error)
-    <div class="invalid-feedback">
+    <small class="text-danger">
         {{ $params->error }}
-    </div>
+    </small>
 @endif

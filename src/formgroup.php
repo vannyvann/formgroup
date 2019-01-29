@@ -13,18 +13,23 @@ return [
                 'Select' => [
                     'view' => 'formgroup::default.select',
                     'casts' => ['name', 'options', 'value'],
-                    'hidden' => ['value', 'placeholder', 'options']
+                    'hidden' => ['value', 'placeholder']
                 ],
                 'Text' => [
                     'view' => 'formgroup::default.textarea',
                     'casts' => ['name', 'value'],
+                    'hidden' => ['value']
+                ],
+                'Option' => [
+                    'view' => 'formgroup::default.radios',
+                    'casts' => ['name', 'options', 'value'],
                     'hidden' => ['value']
                 ]
             ],
 
             'config' => [
                 'prefix' => 'group',
-                'hidden' => ['label', 'hint', 'error'],
+                'hidden' => ['label', 'hint', 'error', 'options'],
                 'id' => '@name',
                 'error' => 'is-invalid',
                 'label' => [

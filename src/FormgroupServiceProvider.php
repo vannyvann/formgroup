@@ -24,17 +24,18 @@ class FormgroupServiceProvider extends ServiceProvider
 
         $groups = config('formgroup.groups');
 
-        foreach ($groups as $group_name => $group ) {
-            foreach ($group['components'] as $name => $options) {
+        if(is_array($groups)){
+            foreach ($groups as $group_name => $group ) {
+                foreach ($group['components'] as $name => $options) {
 
-                $method_name = $group['config']['prefix'] . $name;
-                Form::component($method_name, $options['view'], [
-                    'params',
-                    'errors' => null,
-                    'options' => $options,
-                    'config' => $group['config']
-                ]);
-
+                    $method_name = $group['config']['prefix'] . $name;
+                    Form::component($method_name, $options['view'], [
+                        'params',
+                        'errors' => null,
+                        'options' => $options,
+                        'config' => $group['config']
+                    ]);
+                }
             }
         }
     }
