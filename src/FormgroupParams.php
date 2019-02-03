@@ -50,8 +50,8 @@ class FormgroupParams
             if(array_get($this->params, $index)){
 
                 // Check if param already set to avoid overwriting and save value
-                if(!array_key_exists($cast, $this->params)){
-                    $this->params[$cast] = $this->params[$index];
+                if(!$this->has($cast)){
+                    $this->set($cast, $this->params[$index]);
                 }
 
                 // Remove numeral index
@@ -78,21 +78,65 @@ class FormgroupParams
         }
     }
 
-    private function replaceDefaults()
+    protected function replaceDefaults()
     {
+        $this->setDefaultId();
+        $this->setDefaultLabel();
+    }
 
-        // Set Default Id field
-        if(!$this->get('id') && $this->config('id')){
-            $this->params['id'] = $this->replaceMask($this->config('id'));
-        }else{
-            $this->params['id'] = uniqid();
+    protected function tagParam($key, $value)
+    {
+        // if param set as [... 'param' => false]
+        if($value === false){
+            return null;
         }
 
-        // Set default Label & Make it nice looking
-        $label = $this->get('label');
-        if(!$label && $this->config('label.auto')){
+        // if params set as [... 'param']
+        if(is_integer($key)){
+            return $value;
+        }
 
-            $label = $this->replaceMask($this->config['label']['auto']);
+        // if param set as [... 'param' => true]
+        if($value === true){
+            return $key;
+        }
+
+        // if param set as [... 'key' => 'param']
+        return $key . "=\"" . $value ."\"";
+    }
+
+    public function get($name, $default = null)
+    {
+        return array_get($this->params, $name, $default);
+    }
+
+    public function has($name)
+    {
+        return array_key_exists($name, $this->params);
+    }
+
+    public function set($name, $value)
+    {
+        $this->params[$name] = $value;
+    }
+
+    public function config($name, $default = null)
+    {
+        return array_get($this->config, $name, $default);
+    }
+
+    protected function setDefaultId()
+    {
+        if(!$this->has('id') && $this->config('id')){
+            $this->set('id', $this->get($this->config('id')));
+        }
+    }
+
+    protected function setDefaultLabel()
+    {
+        if(!$this->has('label') && $this->config('label.auto')){
+
+            $label = $this->get($this->config('label.auto'));
 
             // Replace options
             foreach ($this->config('label.replace') as $key => $value) {
@@ -105,53 +149,9 @@ class FormgroupParams
             if($capitalize = $this->config('label.capitalize')){
                 $label = $capitalize($label);
             }
-            $this->params['label'] = $label;
+
+            $this->set('label', $label);
         }
     }
-
-    private function replaceMask($mask)
-    {
-        foreach ($this->params as $name => $value) {
-            if(!is_string($value)) continue;
-            $mask = str_replace ('@' . $name, $value, $mask);
-        }
-        return $mask;
-    }
-
-    private function tagParam($key, $param)
-    {
-        if($param === false){
-            return null;
-        }
-
-        // if params set as [... 'param']
-        if(is_integer($key)){
-            return $param;
-        }
-
-        // if param set as [... 'param' => true]
-        if($param === true){
-            return $key;
-        }
-
-        // if param set as [... 'key' => 'param']
-        return $key . "=\"" . $param ."\"";
-    }
-
-    public function get($name, $default = null)
-    {
-        return array_get($this->params, $name, $default);
-    }
-
-    public function set($name, $value)
-    {
-        $this->params[$name] = $value;
-    }
-
-    private function config($name, $default = null)
-    {
-        return array_get($this->config, $name, $default);
-    }
-
 
 }

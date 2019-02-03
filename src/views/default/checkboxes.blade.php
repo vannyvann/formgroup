@@ -7,12 +7,12 @@
                 <input {!! $params->basicOptions([
                     'class' => 'custom-control-input',
                     'type' => 'checkbox',
-                    'id' => $name . $value,
-                    'value' => $value,
-                    'checked' => is_array($params->get('value')) && in_array($value, $params->get('value'))
+                    'id' => $params->get('id') . $value,
+                    'checked' => in_array($value, $params->get('checked')),
+                    'value' => $value
                 ]) !!}>
 
-                <label class="custom-control-label" for="{{ $name . $value }}">
+                <label class="custom-control-label" for="{{ $params->get('id') . $value }}">
                     {{ $name }}
                 </label>
             </div>

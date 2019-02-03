@@ -20,10 +20,25 @@ return [
                     'casts' => ['name', 'value'],
                     'hidden' => ['value']
                 ],
-                'Option' => [
+                'Radio' => [
+                    'view' => 'formgroup::default.radio',
+                    'casts' => ['name', 'options', 'value'],
+                    'hidden' => ['value', 'nullable']
+                ],
+                'Radios' => [
                     'view' => 'formgroup::default.radios',
                     'casts' => ['name', 'options', 'value'],
-                    'hidden' => ['value']
+                    'hidden' => ['value', 'nullable']
+                ],
+                'Checkbox' => [
+                    'view' => 'formgroup::default.checkbox',
+                    'casts' => ['name', 'value', 'checked'],
+                    'hidden' => ['nullable']
+                ],
+                'Checkboxes' => [
+                    'view' => 'formgroup::default.checkboxes',
+                    'casts' => ['name', 'options', 'value'],
+                    'hidden' => ['value', 'nullable']
                 ]
             ],
 
