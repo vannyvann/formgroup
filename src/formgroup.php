@@ -33,22 +33,23 @@ return [
                 'Checkbox' => [
                     'view' => 'formgroup::default.checkbox',
                     'casts' => ['name', 'value', 'checked'],
-                    'hidden' => ['nullable']
+                    'hidden' => []
                 ],
                 'Checkboxes' => [
                     'view' => 'formgroup::default.checkboxes',
                     'casts' => ['name', 'options', 'value'],
-                    'hidden' => ['value', 'nullable']
+                    'hidden' => []
                 ]
             ],
 
             'config' => [
                 'prefix' => 'group',
-                'hidden' => ['label', 'hint', 'error', 'options'],
-                'id' => '@name',
+                'hidden' => ['label', 'hint', 'error', 'options', 'nullable'],
+                'id' => 'name',
                 'error' => 'is-invalid',
                 'label' => [
-                    'auto' => '@name',
+                    'auto' => 'name',
+                    'errorClass' => 'text-danger',
                     'replace' => ['_id', '[', ']', '_' => ' '],
                     'capitalize' => 'ucfirst',
                 ],

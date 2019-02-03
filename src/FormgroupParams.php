@@ -72,8 +72,10 @@ class FormgroupParams
 
     private function replaceError()
     {
-        if($this->errors && $this->errors->has($this->get('name'))){
-            $this->error = $this->errors->first($this->get('name'));
+        $errorName = $this->nameToDotNotation($this->get('name'));
+
+        if($this->errors && $this->errors->has($errorName)){
+            $this->error = $this->errors->first($errorName);
             $this->classes[] = $this->config('error');
         }
     }
@@ -152,6 +154,22 @@ class FormgroupParams
 
             $this->set('label', $label);
         }
+    }
+
+    protected function nameToDotNotation($name)
+    {
+        // Get dot notation name for detecting errors,
+        // so name like "name[]", "name[subname]..." will be "name", "name.subname"
+        $replacements = [
+            '[]' => '',
+            '][' => '.',
+            '[' => '.',
+
+        ];
+        foreach($replacements as $find => $replace){
+            $name = str_replace($find, $replace, $name);
+        }
+        return $name;
     }
 
 }

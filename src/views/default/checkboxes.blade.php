@@ -8,10 +8,9 @@
                     'class' => 'custom-control-input',
                     'type' => 'checkbox',
                     'id' => $params->get('id') . $value,
-                    'checked' => in_array($value, $params->get('checked')),
+                    'checked' => in_array($value, $params->get('value')),
                     'value' => $value
                 ]) !!}>
-
                 <label class="custom-control-label" for="{{ $params->get('id') . $value }}">
                     {{ $name }}
                 </label>
