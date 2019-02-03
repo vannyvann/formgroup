@@ -9,7 +9,7 @@
                     'type' => 'radio',
                     'id' => $name . $value,
                     'value' => $value,
-                    'checked' => $value == $params->get('value')    
+                    'checked' => $value == $params->get('value')
                 ]) !!}>
 
                 <label class="custom-control-label" for="{{ $name . $value }}">
