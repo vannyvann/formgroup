@@ -164,7 +164,7 @@ class FormgroupParams
             '[]' => '',
             '][' => '.',
             '[' => '.',
-
+            ']' => ''
         ];
         foreach($replacements as $find => $replace){
             $name = str_replace($find, $replace, $name);
