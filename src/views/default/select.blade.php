@@ -3,7 +3,7 @@
     @component('formgroup::default.template', compact('params'))
         <select {!! $params->basicOptions(['class' => 'form-control']) !!}>
             @if($placeholder = $params->get('placeholder'))
-                <option>{{ $placeholder }}</option>
+                <option value>{{ $placeholder }}</option>
             @endif
 
             @foreach ($params->get('options') as $value => $name)
