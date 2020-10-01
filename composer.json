@@ -1,7 +1,7 @@
 {
     "name": "vannyvann/formgroup",
     "require": {
-        "laravelcollective/html": "^5.7@dev"
+        "laravelcollective/html": "^6.0"
     },
     "authors": [
         {
